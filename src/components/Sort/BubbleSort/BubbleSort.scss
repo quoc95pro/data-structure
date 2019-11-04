@@ -1,0 +1,60 @@
+.cus-div-left {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  float: left;
+}
+.anim-left-to-right {
+    -webkit-animation-name: left-to-right; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+    animation-name: left-to-right;
+    animation-duration: 4s;
+    animation-delay: 2s;
+  }
+
+  .cus-div-right {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    float: left;
+    margin-left: 100px;
+  }
+  .anim-right-to-left {
+      -webkit-animation-name: right-to-left; /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+      -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+      animation-name: right-to-left;
+      animation-duration: 4s;
+      animation-delay: 2s;
+    }
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes left-to-right {
+  0%   {background-color:green; left:0px; top:0px;}
+  100%  {background-color:green; left:200px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes left-to-right {
+  0%   {background-color:green; left:0px; top:0px;}
+  100%  {background-color:green; left:200px; top:0px;}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes right-to-left {
+    0%   {background-color:green; right:0px; top:0px;}
+    33%  {background-color:green; right:0px; top:200px;}
+    66%  {background-color:green; right:200px; top:200px;}
+    100%  {background-color:green; right:200px; top:0px;}
+  }
+  
+  /* Standard syntax */
+  @keyframes right-to-left {
+    0%   {background-color:green; right:0px; top:0px;}
+    33%  {background-color:green; right:0px; top:200px;}
+    66%  {background-color:green; right:200px; top:200px;}
+    100%  {background-color:green; right:200px; top:0px;}
+  }
