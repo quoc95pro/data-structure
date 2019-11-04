@@ -8,13 +8,13 @@
 .anim-left-to-right {
   -webkit-animation-name: left-to-right;
   /* Safari 4.0 - 8.0 */
-  -webkit-animation-duration: 4s;
+  -webkit-animation-duration: 3s;
   /* Safari 4.0 - 8.0 */
-  -webkit-animation-delay: 2s;
+  -webkit-animation-delay: 1s;
   /* Safari 4.0 - 8.0 */
   animation-name: left-to-right;
-  animation-duration: 4s;
-  animation-delay: 2s; }
+  animation-duration: 3s;
+  animation-delay: 1s; }
 
 .cus-div-right {
   width: 100px;
@@ -27,13 +27,13 @@
 .anim-right-to-left {
   -webkit-animation-name: right-to-left;
   /* Safari 4.0 - 8.0 */
-  -webkit-animation-duration: 4s;
+  -webkit-animation-duration: 3s;
   /* Safari 4.0 - 8.0 */
-  -webkit-animation-delay: 2s;
+  -webkit-animation-delay: 1s;
   /* Safari 4.0 - 8.0 */
   animation-name: right-to-left;
-  animation-duration: 4s;
-  animation-delay: 2s; }
+  animation-duration: 3s;
+  animation-delay: 1s; }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes left-to-right {
