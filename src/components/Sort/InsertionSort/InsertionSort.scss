@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.cus-div-left {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  float: left;
+}
+
+  .cus-div-right {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    float: left;
+    margin-left: 100px;
+  }

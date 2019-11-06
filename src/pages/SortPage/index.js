@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import BubbleSort from './../../components/Sort/BubbleSort'
+import BubbleSort from './../../components/Sort/BubbleSort';
+//import InsertionSort from './../../components/Sort/InsertionSort';
+import './SortPage.css'
 
 class SortPage extends Component {
     render() {
@@ -7,6 +9,7 @@ class SortPage extends Component {
             <div>
                 SortPage
                 <BubbleSort></BubbleSort>
+                {/* <InsertionSort ></InsertionSort> */}
             </div>
         );
     }
