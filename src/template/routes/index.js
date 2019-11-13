@@ -10,7 +10,7 @@ const routes = {
     }
     , SortPage: {
         path: '/sort',
-        exact: true,
+        exact: false,
         component: SortPage,
         private: false
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import './InsertionSort.css'
+import './InsertionSort.css';
 class InsertionSort extends Component {
 
     constructor(props) {
@@ -22,19 +22,19 @@ class InsertionSort extends Component {
     }
 
     goUp(pos) {
-        $("#cus-div-id-" + pos).animate({ "top": "+=200px" }, 2000);
+        $("#cus-div-id-" + pos).animate({ "top": "+=100px" }, 2000);
     }
 
     toLeft(pos) {
-        $("#cus-div-id-" + pos).animate({ "right": "+=200px" }, 2000);
+        $("#cus-div-id-" + pos).animate({ "right": "+=100px" }, 2000);
     }
 
     toRight(pos) {
-        $("#cus-div-id-" + pos).animate({ "left": "+=200px" }, 2000);
+        $("#cus-div-id-" + pos).animate({ "left": "+=100px" }, 2000);
     }
 
     goDown(pos) {
-        $("#cus-div-id-" + pos).animate({ "top": "-=200px" }, 2000);
+        $("#cus-div-id-" + pos).animate({ "top": "-=100px" }, 2000);
     }
 
     sort = async (arr) => {
@@ -76,8 +76,6 @@ class InsertionSort extends Component {
             $("#cus-div-id-" + i).css("right", "0");
             $("#cus-div-id-" + i).html(arr2[i][1]);
         }
-        console.log(this.inputArr);
-
     }
 
     render() {
@@ -85,8 +83,8 @@ class InsertionSort extends Component {
         return (
             <div>
                 <p><b>Note: </b>{this.title}</p>
+                <p><button onClick={() => this.sort(this.inputArr)} className='btn btn-primary'>Sort</button></p>
                 {this.initArray(this.inputArr)}
-                <button onClick={() => this.sort(this.inputArr)}>ok</button>
             </div>
         );
     }

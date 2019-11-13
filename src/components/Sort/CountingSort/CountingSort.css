@@ -1,0 +1,29 @@
+.cus-div-count-left {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  float: left;
+  border: 1px solid brown; }
+
+.cus-div-count-right {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  float: left;
+  margin-left: 5px;
+  border: 1px solid brown; }
+
+.cus-div-out-left {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  float: left;
+  border: 1px solid brown; }
+
+.cus-div-out-right {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  float: left;
+  margin-left: 50px;
+  border: 1px solid brown; }

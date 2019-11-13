@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import './BubbleSort.css';
-class BubbleSort extends Component {
-
+import './SelectionSort.css';
+class SelectionSort extends Component {
     constructor(props) {
         super(props);
-        this.title = 'Bubble Sort'
+        this.title = 'Selection Sort'
         this.inputArr = [14, 33, 27, 35, 10, 30, 16];
     }
 
@@ -25,12 +24,12 @@ class BubbleSort extends Component {
         $("#cus-div-id-" + pos).animate({ "top": "+=100px" }, 2000);
     }
 
-    toLeft(pos) {
-        $("#cus-div-id-" + pos).animate({ "right": "+=100px" }, 2000);
+    toLeft(pos, i) {
+        $("#cus-div-id-" + pos).animate({ "left": "-="+100*i+"px" }, 2000);
     }
 
-    toRight(pos) {
-        $("#cus-div-id-" + pos).animate({ "left": "+=100px" }, 2000);
+    toRight(pos, i) {
+        $("#cus-div-id-" + pos).animate({ "left": "+="+100*i+"px" }, 2000);
     }
 
     goDown(pos) {
@@ -38,24 +37,29 @@ class BubbleSort extends Component {
     }
 
     sort = async (arr) => {
-        let temp, check, arr2 = arr.map((value, key) => [key, value]);     
-        do {
-            check = true;
-            for (let i = 0; i < arr2.length - 1; i++) {
-             
-                if (arr2[i][1] > arr2[i + 1][1]) {
-                    this.goUp(arr2[i+1][0]);
-                    this.toLeft(arr2[i+1][0]);
-                    this.goDown(arr2[i+1][0]);
-                    this.toRight(arr2[i][0]);
-                    await this.timer(6000);
-                    temp = arr2[i];
-                    arr2[i] = arr2[i + 1];
-                    arr2[i + 1] = temp;
-                    check = false;
+         let  arr2 = arr.map((value, key) => [key, value]);
+         for (let i = 0; i < arr2.length; i++) {
+            let min = i;
+            this.goUp(arr2[i][0]);
+            for (let j = i+1; j < arr2.length; j++) {
+                
+                if (arr2[min][1] > arr2[j][1]) {
+                    min = j;
                 }
             }
-        } while (check === false);
+            this.toRight(arr2[i][0],min-i);
+            this.goDown(arr2[i][0]);
+
+            if((min-i) > 0){
+                this.goUp(arr2[min][0]);
+            this.toLeft(arr2[min][0],min-i);
+            this.goDown(arr2[min][0]);
+            }
+            await this.timer(6000);
+            let temp = arr2[i];
+            arr2[i] = arr2[min];
+            arr2[min] = temp;           
+        }
 
         this.inputArr = arr2.map(x => x[1]);
         for (let i = 0; i < arr2.length; i++) {
@@ -77,4 +81,4 @@ class BubbleSort extends Component {
     }
 }
 
-export default BubbleSort;
+export default SelectionSort;
