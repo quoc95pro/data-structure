@@ -5,8 +5,13 @@ class BucketSort extends Component {
 
     constructor(props) {
         super(props);
-        this.title = 'Bucket Sort'
-        this.inputArr = [14, 33, 27, 35, 10, 30, 16];
+        this.title = 'Bucket Sort';
+        this.state = {
+            bucketSize: 5,
+            inputArr: [14, 33, 27, 35, 10, 30, 16],
+            bucketArr: [],
+            disableRandom: false
+        }
     }
 
     initArray = (arr) => {
@@ -14,6 +19,16 @@ class BucketSort extends Component {
             return (
                 <div key={key} className={(key === 0 ? 'cus-div-left' : 'cus-div-right')} id={('cus-div-id-' + key)}>{value}</div>
             )
+        })
+    }
+
+    initBucketArray = (arr) => {
+        return arr.map((value, key) => {
+            return value.map((val, k) => {
+                return (
+                    <div key={k} className={(k === 0 ? 'cus-div-bucket-left' : 'cus-div-bucket-right')} id={('cus-div-bucket-id-' + k)}>{val}</div>
+                )
+            })
         })
     }
 
@@ -37,8 +52,13 @@ class BucketSort extends Component {
         $("#cus-div-id-" + pos).animate({ "top": "-=200px" }, 2000);
     }
 
-    // Implement bucket sort
-     bucketSort(array, bucketSize) {
+    sort = async (array, bucketSize) => {
+        this.setState(() => {
+            return {
+                disableRandom: true,
+            }
+        })
+
         if (array.length === 0) {
             return array;
         }
@@ -59,54 +79,92 @@ class BucketSort extends Component {
         })
 
         // Initializing buckets
-        let bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
-        let allBuckets = new Array(bucketCount);
+        let bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1; //6
+        let allBuckets = [];
 
-        for (i = 0; i < allBuckets.length; i++) {
+        for (i = 0; i < bucketCount; i++) {
             allBuckets[i] = [];
         }
+        
 
-        // Pushing values to buckets
-        array.forEach(function (currentVal) {
-            allBuckets[Math.floor((currentVal - minValue) / bucketSize)].push(currentVal);
-        });
+        for (let i = 0; i < array.length; i++) {
+            allBuckets[Math.floor((array[i] - minValue) / bucketSize)].push(array[i]);
+            this.setState(() => {
+                return {
+                    bucketArr: allBuckets,
+                }
+            })
+            await this.timer(1000);
+        }
 
         // Sorting buckets
-        array.length = 0;
-       
-        allBuckets.forEach(function (bucket) {
-            let length = bucket.length;
-
-            for (let i = 1; i < length; i++) {
-                let temp = bucket[i];
-                for (var j = i - 1; j >= 0 && bucket[j] > temp; j--) {
-                    bucket[j + 1] = bucket[j];
-                }
-                bucket[j + 1] = temp;
+        this.setState((prev) => {
+            return {
+                inputArr: prev.inputArr.map(x => null),
             }
-            bucket.forEach(function (element) {
-                array.push(element)
-            });
-        });
+        })
+        array.length = 0;
+        await this.timer(2000);
 
-        return array;
+        for (let i = 0; i < allBuckets.length; i++) {
+            for (let k = 1; k < allBuckets[i].length; k++) {
+                let temp = allBuckets[i][k];
+                for (var j = k - 1; j >= 0 && allBuckets[i][j] > temp; j--) {
+                    allBuckets[i][j + 1] = allBuckets[i][j];
+                }
+                allBuckets[i][j + 1] = temp;
+                this.setState(() => {
+                    return {
+                        bucketArr: allBuckets,
+                    }
+                })
+                await this.timer(1000);
+            }
+
+            for (let j = 0; j < allBuckets[i].length; j++) {
+                array.push(allBuckets[i][j])
+                this.setState(() => {
+                    return {
+                        inputArr: array,
+                    }
+                })
+                await this.timer(1000);
+            }
+
+            this.setState(() => {
+                return {
+                    disableRandom: false,
+                }
+            })
+        }
     }
 
-  
-
-
-    sort = async (arr) => {
-        let arr2 = this.bucketSort(arr);
-        console.log(arr2);
-
+    randomArray() {
+        let init = [];
+        let size = Math.floor(Math.random() * (10 - 8)) + 8;
+        let bucketSize = Math.floor(Math.random() * (7 - 3)) + 3
+        for (let i = 0; i < size; i++) {
+            init.push(Math.floor(Math.random() * (30 - 1)) + 1);
+        }
+        this.setState(() => {
+            return {
+                bucketSize: bucketSize,
+                inputArr: init
+            }
+        })
     }
 
     render() {
         return (
             <div>
                 <p><b>Note: </b>{this.title}</p>
-                {this.initArray(this.inputArr)}
-                <button onClick={() => this.sort(this.inputArr)}>ok</button>
+                <p><button onClick={() => this.sort(this.state.inputArr)} className='btn btn-primary'>Sort</button></p>
+                <p><button disabled={this.state.disableRandom} onClick={() => this.randomArray()} className='btn btn-primary'>Random Array</button></p>
+                <p>Bucket Size = {this.state.bucketSize}</p>
+                {this.initArray(this.state.inputArr, this.state.bucketSize)}
+                <div style={{ clear: 'both', paddingTop: '10px' }} id='outPut'>Bucket :
+                    <div>{this.initBucketArray(this.state.bucketArr)}</div>
+                </div>
             </div>
         );
     }

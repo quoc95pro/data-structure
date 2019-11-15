@@ -6,8 +6,11 @@ class HeapSort extends Component {
     constructor(props) {
         super(props);
         this.title = 'Heap Sort'
-        this.inputArr = [14, 33, 27, 35, 10, 30, 16];
         this.arr_length = null;
+        this.state = {
+            inputArr: [14, 33, 27, 35, 10, 30, 16],
+            disableRandom: false
+        }
     }
 
     initArray = (arr) => {
@@ -27,17 +30,17 @@ class HeapSort extends Component {
     }
 
     toLeft(pos) {
-        $("#cus-div-id-" + pos).animate({ "right": "+=200px" }, 2000);
+        $("#cus-div-id-" + pos).animate({ "right": "+=100px" }, 2000);
     }
 
     toRight(pos) {
-        $("#cus-div-id-" + pos).animate({ "left": "+=200px" }, 2000);
+        $("#cus-div-id-" + pos).animate({ "right": "-=100px" }, 2000);
     }
 
     goDown(pos) {
         $("#cus-div-id-" + pos).animate({ "top": "-=200px" }, 2000);
     }
-    heap_root(input, i) {
+    async heap_root(input, i) {
         var left = 2 * i + 1;
         var right = 2 * i + 2;
         var max = i;
@@ -51,44 +54,78 @@ class HeapSort extends Component {
         }
 
         if (max !== i) {
-            this.swap(input, i, max);
-            this.heap_root(input, max);
+            await this.swap(input, i, max);
+            await this.heap_root(input, max);
         }
     }
 
-    swap(input, index_A, index_B) {
+    async swap(input, index_A, index_B) {
         var temp = input[index_A];
+        
+        $("#cus-div-id-" + index_A).animate({ "top": "-50px" }, 500);
+        $("#cus-div-id-" + index_A).animate({ "left": +(index_B - index_A) * 100 + "px" }, 1000);
+        $("#cus-div-id-" + index_A).animate({ "top": "0px" }, 500);
 
+        $("#cus-div-id-" + index_B).animate({ "top": "50px" }, 500);
+        $("#cus-div-id-" + index_B).animate({ "left": +(index_A - index_B) * 100 + "px" }, 1000);
+        $("#cus-div-id-" + index_B).animate({ "top": "0px" }, 500);
+        await this.timer(2000);
         input[index_A] = input[index_B];
         input[index_B] = temp;
+        this.setState(() => {
+            return {
+                inputArr: input
+            }
+        })
+
+        $("#cus-div-id-" + index_A).css("left", "0");
+        $("#cus-div-id-" + index_B).css("left", "0");
+        await this.timer(3000);
     }
 
-    heapSort(input) {
-
-        this.array_length = input.length;
-
-        for (var i = Math.floor(this.array_length / 2); i >= 0; i -= 1) {
-            this.heap_root(input, i);
-        }
-
-        for (i = input.length - 1; i > 0; i--) {
-            this.swap(input, 0, i);
-            this.array_length--;
-            this.heap_root(input, 0);
-        }
-    }
     sort = async (arr) => {
-        this.heapSort(arr);
-        console.log(arr);
-        
+        this.setState(() => {
+            return {
+                disableRandom: true
+            }
+        })
+        this.array_length = arr.length;
+        for (var i = Math.floor(this.array_length / 2); i >= 0; i -= 1) {
+            await this.heap_root(arr, i);
+        }
+
+        for (i = arr.length - 1; i > 0; i--) {
+            await this.swap(arr, 0, i);
+            this.array_length--;
+            await this.heap_root(arr, 0);
+        }
+        this.setState(() => {
+            return {
+                disableRandom: false
+            }
+        })
+    }
+
+    randomArray() {
+        let init = [];
+        let size = Math.floor(Math.random() * (10 - 8)) + 8;
+        for (let i = 0; i < size; i++) {
+            init.push(Math.floor(Math.random() * (30 - 1)) + 1);
+        }
+        this.setState(() => {
+            return {
+                inputArr: init
+            }
+        })
     }
 
     render() {
         return (
             <div>
                 <p><b>Note: </b>{this.title}</p>
-                {this.initArray(this.inputArr)}
-                <button onClick={() => this.sort(this.inputArr)}>ok</button>
+                <p><button onClick={() => this.sort(this.state.inputArr)} className='btn btn-primary'>Sort</button></p>
+                <p><button disabled={this.state.disableRandom} onClick={() => this.randomArray()} className='btn btn-primary'>Random Array</button></p>
+                {this.initArray(this.state.inputArr)}
             </div>
         );
     }

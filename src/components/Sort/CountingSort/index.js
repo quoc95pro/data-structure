@@ -145,39 +145,7 @@ class CountingSort extends Component {
     }
 
     render() {
-        let code = `sort = async (arr) => {  
-            let output = []; // The output will have sorted input array
-            let max = arr[0];
-            let min = arr[0];
-            for (let i = 1; i < arr.length; i++) {
-                if (arr[i] > max)
-                                max = arr[i];
-                else if (arr[i] < min)
-                                min = arr[i];
-                        }
-
-            let k = max - min + 1;
-            let count_array = [];
-            for (let i = 0; i < k; i++)
-                    count_array[i] = 0;
-    
-
-            for (let i = 0; i < arr.length; i++) 
-                count_array[arr[i] - min]++;
-    
-
-            for (let i = 1; i < k; i++)
-                count_array[i] += count_array[i - 1];
-
-
-            for (let i = 0; i < arr.length; i++) {
-                output[count_array[arr[i] - min] - 1] = arr[i];
-                count_array[arr[i] - min]--;
-            }
-
-            for (let i = 0; i < arr.length; i++)
-                arr[i] = output[i];
-        }`;
+       
         return (
             <div>
                 <p><b>Note: </b>{this.title}</p>
@@ -190,7 +158,7 @@ class CountingSort extends Component {
                 <div>{this.initOutPutArray(this.state.outPutArr)}</div>
                     <div>
                         <pre>
-                            <code>{code}</code>
+                            <code></code>
                         </pre>
                     </div>
                 </div>

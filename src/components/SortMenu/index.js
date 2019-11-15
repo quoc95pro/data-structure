@@ -45,6 +45,11 @@ class SortMenu extends Component {
                             <li><Link to="/BubbleSort">Bubble Sort</Link></li>
                             <li><Link to="/InsertionSort">Insertion Sort</Link></li>
                             <li><Link to="/CountingSort">Counting Sort</Link></li>
+                            <li><Link to="/BucketSort">Bucket Sort</Link></li>
+                            <li><Link to="/ShellSort">Shell Sort</Link></li>
+                            <li><Link to="/RadixSort">Radix Sort</Link></li>
+                            <li><Link to="/HeapSort">Heap Sort</Link></li>
+                            <li><Link to="/MergeSort">Merge Sort</Link></li>
                         </ul>
 
                     </div>

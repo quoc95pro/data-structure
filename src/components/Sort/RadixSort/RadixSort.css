@@ -1,0 +1,16 @@
+.cus-div-buckets-left {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  float: left;
+  border: 1px solid brown;
+  font-size: 11px; }
+
+.cus-div-buckets-right {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  float: left;
+  margin-left: 30px;
+  border: 1px solid brown;
+  font-size: 11px; }

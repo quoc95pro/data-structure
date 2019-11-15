@@ -1,0 +1,9 @@
+#outPut {
+  clear: both;
+  margin-top: 100px; }
+
+.item {
+  width: 20px;
+  height: 20px;
+  border: 1px solid brown;
+  margin-right: 10px; }
